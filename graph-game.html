@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图论探险 - 算法冒险家</title>
+    <!-- 引入FontAwesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 游戏特定样式 */
+        .algorithm-selection {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .algorithm-option {
+            padding: 10px 15px;
+            background-color: var(--gray-light);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .algorithm-option:hover {
+            background-color: var(--light-color);
+        }
+        
+        .algorithm-option.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .node-config {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .node-type {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .node-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        .node-start {
+            background-color: var(--primary-color);
+        }
+        
+        .node-end {
+            background-color: var(--success-color);
+        }
+        
+        .node-unvisited {
+            background-color: var(--gray);
+        }
+        
+        .node-visited {
+            background-color: var(--secondary-color);
+        }
+        
+        .node-path {
+            background-color: var(--warning-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-logo">
+            <i class="fas fa-code-branch"></i> 算法冒险家
+        </a>
+        
+        <ul class="navbar-menu">
+            <li><a href="world-map.html">游戏世界</a></li>
+            <li><a href="#leaderboard">排行榜</a></li>
+            <li><a href="#daily-challenge">每日挑战</a></li>
+            <li><a href="#resources">学习资源</a></li>
+        </ul>
+        
+        <div class="navbar-auth">
+            <a href="#login" class="btn btn-outline">登录</a>
+            <a href="#register" class="btn btn-primary">注册</a>
+        </div>
+    </nav>
+
+    <!-- 主内容区域 -->
+    <div class="container">
+        <h1>图论探险</h1>
+        <p>探索图论算法的奥秘，学习如何在复杂的网络结构中找到最优路径！</p>
+        
+        <!-- 游戏界面 -->
+        <div class="game-interface">
+            <!-- 游戏头部信息 -->
+            <div class="game-header">
+                <div class="game-status">
+                    <div class="status-item">
+                        <i class="fas fa-map-marker-alt"></i> 关卡: 迷宫探索 3-2
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-stopwatch"></i> 时间: 02:30
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-lightbulb"></i> 提示: 2/3
+                    </div>
+                </div>
+                
+                <button class="btn btn-outline">
+                    <i class="fas fa-pause"></i> 暂停
+                </button>
+            </div>
+            
+            <!-- 算法选择 -->
+            <div style="padding: 15px; background-color: var(--light-color);">
+                <div class="algorithm-selection">
+                    <div class="algorithm-option active">深度优先搜索 (DFS)</div>
+                    <div class="algorithm-option">广度优先搜索 (BFS)</div>
+                    <div class="algorithm-option">Dijkstra 算法</div>
+                    <div class="algorithm-option">A* 算法</div>
+                </div>
+                
+                <div class="node-config">
+                    <div class="node-type">
+                        <div class="node-color node-start"></div>
+                        <span>起点</span>
+                    </div>
+                    <div class="node-type">
+                        <div class="node-color node-end"></div>
+                        <span>终点</span>
+                    </div>
+                    <div class="node-type">
+                        <div class="node-color node-unvisited"></div>
+                        <span>未访问</span>
+                    </div>
+                    <div class="node-type">
+                        <div class="node-color node-visited"></div>
+                        <span>已访问</span>
+                    </div>
+                    <div class="node-type">
+                        <div class="node-color node-path"></div>
+                        <span>路径</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 图论游戏区域 -->
+            <div style="position: relative; padding: 20px; background-color: #f0f7ff; height: 450px;">
+                <!-- 图论可视化区域 -->
+                <div class="graph-container">
+                    <!-- 图的节点 -->
+                    <div class="graph-node start" style="top: 30%; left: 20%;" data-node="A">A</div>
+                    <div class="graph-node" style="top: 20%; left: 40%;" data-node="B">B</div>
+                    <div class="graph-node" style="top: 50%; left: 40%;" data-node="C">C</div>
+                    <div class="graph-node" style="top: 70%; left: 25%;" data-node="D">D</div>
+                    <div class="graph-node" style="top: 40%; left: 60%;" data-node="E">E</div>
+                    <div class="graph-node end" style="top: 60%; left: 75%;" data-node="F">F</div>
+                    
+                    <!-- 图的边（线）会通过JavaScript生成 -->
+                    
+                    <!-- 边的权重 -->
+                    <div class="graph-weight" style="top: 25%; left: 30%;">5</div>
+                    <div class="graph-weight" style="top: 40%; left: 30%;">3</div>
+                    <div class="graph-weight" style="top: 50%; left: 22%;">7</div>
+                    <div class="graph-weight" style="top: 30%; left: 50%;">8</div>
+                    <div class="graph-weight" style="top: 45%; left: 50%;">2</div>
+                    <div class="graph-weight" style="top: 60%; left: 33%;">6</div>
+                    <div class="graph-weight" style="top: 50%; left: 68%;">4</div>
+                </div>
+                
+                <!-- 控制按钮 -->
+                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-play"></i> 运行 DFS 算法
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-redo"></i> 重置图
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-random"></i> 生成新图
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 算法解释面板 -->
+            <div class="game-controls">
+                <h4><i class="fas fa-info-circle"></i> 深度优先搜索 (DFS) 算法</h4>
+                <p>深度优先搜索是一种用于遍历或搜索树或图的算法。它从根节点（或任何选定的节点）开始，沿着一条路径尽可能深入地探索，直到无法继续为止，然后回溯到上一个节点，探索其他路径。</p>
+                <div class="algorithm-code">
+                    <pre>
+function DFS(graph, start, visited = new Set()) {
+    console.log(start); // 访问当前节点
+    visited.add(start);
+    
+    for (let neighbor of graph[start]) {
+        if (!visited.has(neighbor)) {
+            DFS(graph, neighbor, visited);
+        }
+    }
+}
+                    </pre>
+                </div>
+                <p style="margin-top: 10px;">时间复杂度: O(V + E) - 其中 V 是顶点数，E 是边数</p>
+                
+                <div class="algorithm-visualization" style="margin-top: 20px;">
+                    <h4>算法执行步骤</h4>
+                    <div class="execution-steps">
+                        <div class="execution-step">
+                            <span class="step-number">1</span>
+                            <span class="step-description">从节点 A 开始搜索</span>
+                        </div>
+                        <div class="execution-step">
+                            <span class="step-number">2</span>
+                            <span class="step-description">访问节点 A 的邻居 B</span>
+                        </div>
+                        <div class="execution-step">
+                            <span class="step-number">3</span>
+                            <span class="step-description">从 B 访问其邻居 E</span>
+                        </div>
+                        <div class="execution-step current">
+                            <span class="step-number">4</span>
+                            <span class="step-description">从 E 访问其邻居 F</span>
+                        </div>
+                        <div class="execution-step">
+                            <span class="step-number">5</span>
+                            <span class="step-description">找到终点 F，算法完成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 图论算法知识 -->
+        <div class="graph-knowledge">
+            <h2>图论算法知识</h2>
+            
+            <div class="knowledge-tabs">
+                <div class="knowledge-tab active" data-tab="dfs">深度优先搜索 (DFS)</div>
+                <div class="knowledge-tab" data-tab="bfs">广度优先搜索 (BFS)</div>
+                <div class="knowledge-tab" data-tab="dijkstra">Dijkstra 算法</div>
+                <div class="knowledge-tab" data-tab="astar">A* 算法</div>
+            </div>
+            
+            <div class="knowledge-content">
+                <div class="knowledge-panel active" id="dfs">
+                    <h3>深度优先搜索 (Depth-First Search, DFS)</h3>
+                    <p>深度优先搜索是一种用于遍历或搜索树或图的算法。它从根节点开始，沿着一条路径尽可能深入地探索，直到无法继续为止，然后回溯到上一个节点，探索其他路径。</p>
+                    
+                    <h4>算法特点</h4>
+                    <ul>
+                        <li>递归实现简单，也可以用栈实现</li>
+                        <li>空间复杂度与最深路径相关</li>
+                        <li>可能不会找到最短路径</li>
+                        <li>适合搜索深度较大的问题</li>
+                    </ul>
+                    
+                    <h4>应用场景</h4>
+                    <ul>
+                        <li>拓扑排序</li>
+                        <li>寻找连通分量</li>
+                        <li>寻找图中环</li>
+                        <li>解决迷宫问题</li>
+                    </ul>
+                    
+                    <h4>算法复杂度</h4>
+                    <p>时间复杂度：O(V + E)，其中 V 是顶点数，E 是边数<br>
+                    空间复杂度：O(V)，需要递归栈或显式栈来存储已访问顶点</p>
+                </div>
+                
+                <div class="knowledge-panel" id="bfs" style="display: none;">
+                    <h3>广度优先搜索 (Breadth-First Search, BFS)</h3>
+                    <p>广度优先搜索是从根节点开始，沿着宽度方向寻找，而不是深度。它一层一层地遍历，先访问所有邻接节点，然后再访问下一层的节点。</p>
+                    
+                    <h4>算法特点</h4>
+                    <ul>
+                        <li>使用队列实现</li>
+                        <li>总是按照距离起点由近到远的顺序访问节点</li>
+                        <li>可以找到最短路径（在无权图中）</li>
+                        <li>适合搜索宽度较大的问题</li>
+                    </ul>
+                    
+                    <h4>应用场景</h4>
+                    <ul>
+                        <li>无权图的最短路径</li>
+                        <li>寻找连通分量</li>
+                        <li>解决部分迷宫问题</li>
+                        <li>网络爬虫</li>
+                    </ul>
+                    
+                    <h4>算法复杂度</h4>
+                    <p>时间复杂度：O(V + E)，其中 V 是顶点数，E 是边数<br>
+                    空间复杂度：O(V)，需要队列来存储节点</p>
+                </div>
+                
+                <div class="knowledge-panel" id="dijkstra" style="display: none;">
+                    <h3>Dijkstra 算法</h3>
+                    <p>Dijkstra 算法是一种求解单源最短路径的贪心算法。它使用优先队列来选择当前距离起点最近的未访问顶点，然后通过它更新与其相邻的顶点的距离。</p>
+                    
+                    <h4>算法特点</h4>
+                    <ul>
+                        <li>贪心算法，每次选择距离最小的顶点</li>
+                        <li>适用于有权图（权值非负）</li>
+                        <li>可以找到从起点到所有其他顶点的最短路径</li>
+                    </ul>
+                    
+                    <h4>应用场景</h4>
+                    <ul>
+                        <li>GPS导航系统</li>
+                        <li>网络路由协议</li>
+                        <li>机器人路径规划</li>
+                    </ul>
+                    
+                    <h4>算法复杂度</h4>
+                    <p>时间复杂度：O(V² + E)，使用优先队列可改进为 O((V+E)log V)<br>
+                    空间复杂度：O(V + E)</p>
+                </div>
+                
+                <div class="knowledge-panel" id="astar" style="display: none;">
+                    <h3>A* 算法</h3>
+                    <p>A* 算法是一种启发式搜索算法，结合了 Dijkstra 算法和最佳优先搜索的优点。它使用启发式函数来估计从当前节点到目标节点的距离，优先探索那些更有可能通向目标的路径。</p>
+                    
+                    <h4>算法特点</h4>
+                    <ul>
+                        <li>启发式搜索，使用估价函数 f(n) = g(n) + h(n)</li>
+                        <li>g(n) 是从起点到当前节点的实际代价</li>
+                        <li>h(n) 是从当前节点到目标的估计代价</li>
+                        <li>当 h(n) 是可接受的（不会高估实际代价），A* 算法能找到最优解</li>
+                    </ul>
+                    
+                    <h4>应用场景</h4>
+                    <ul>
+                        <li>游戏寻路算法</li>
+                        <li>机器人路径规划</li>
+                        <li>地图导航系统</li>
+                    </ul>
+                    
+                    <h4>算法复杂度</h4>
+                    <p>时间复杂度：取决于启发式函数，最坏情况 O(E)<br>
+                    空间复杂度：O(V)，需要存储搜索过程中的所有节点</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-code-branch"></i> 算法冒险家
+                </div>
+                <div class="footer-links">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系方式</a>
+                    <a href="#">使用条款</a>
+                    <a href="#">隐私政策</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2023 算法冒险家. 保留所有权利.
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script>
+        // 生成图的边
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建边连接
+            createGraphEdges();
+            
+            // 知识面板切换功能
+            const knowledgeTabs = document.querySelectorAll('.knowledge-tab');
+            const knowledgePanels = document.querySelectorAll('.knowledge-panel');
+            
+            knowledgeTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 移除所有活动标签和面板
+                    knowledgeTabs.forEach(t => t.classList.remove('active'));
+                    knowledgePanels.forEach(p => p.style.display = 'none');
+                    
+                    // 激活当前标签和面板
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).style.display = 'block';
+                });
+            });
+            
+            // 算法选择切换
+            const algorithmOptions = document.querySelectorAll('.algorithm-option');
+            
+            algorithmOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    algorithmOptions.forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 更新算法说明面板
+                    const algorithmInfoTitle = document.querySelector('.game-controls h4');
+                    algorithmInfoTitle.innerHTML = `<i class="fas fa-info-circle"></i> ${this.textContent}`;
+                    
+                    // 更新运行按钮
+                    const runButton = document.querySelector('.btn-primary');
+                    runButton.innerHTML = `<i class="fas fa-play"></i> 运行 ${this.textContent.split(' ')[0]} 算法`;
+                });
+            });
+            
+            // 运行算法按钮
+            const runButton = document.querySelector('.btn-primary');
+            if (runButton) {
+                runButton.addEventListener('click', function() {
+                    const algorithm = document.querySelector('.algorithm-option.active').textContent;
+                    
+                    if (algorithm.includes('DFS')) {
+                        runDFSAnimation();
+                    } else {
+                        alert(`${algorithm} 演示正在开发中，敬请期待！`);
+                    }
+                });
+            }
+            
+            // 重置图按钮
+            const resetButton = document.querySelector('.btn-outline:nth-of-type(1)');
+            if (resetButton) {
+                resetButton.addEventListener('click', function() {
+                    resetGraph();
+                });
+            }
+            
+            // 生成新图按钮
+            const newGraphButton = document.querySelector('.btn-outline:nth-of-type(2)');
+            if (newGraphButton) {
+                newGraphButton.addEventListener('click', function() {
+                    alert('生成新图功能正在开发中，敬请期待！');
+                });
+            }
+        });
+        
+        // 创建图的边
+        function createGraphEdges() {
+            const graphContainer = document.querySelector('.graph-container');
+            if (!graphContainer) return;
+            
+            // 边的配置
+            const edges = [
+                { from: 'A', to: 'B' },
+                { from: 'A', to: 'C' },
+                { from: 'A', to: 'D' },
+                { from: 'B', to: 'E' },
+                { from: 'C', to: 'E' },
+                { from: 'C', to: 'D' },
+                { from: 'E', to: 'F' }
+            ];
+            
+            // 创建边
+            edges.forEach(edge => {
+                const fromNode = document.querySelector(`.graph-node[data-node="${edge.from}"]`);
+                const toNode = document.querySelector(`.graph-node[data-node="${edge.to}"]`);
+                
+                if (fromNode && toNode) {
+                    const fromRect = fromNode.getBoundingClientRect();
+                    const toRect = toNode.getBoundingClientRect();
+                    const containerRect = graphContainer.getBoundingClientRect();
+                    
+                    // 计算边的两端坐标（相对于容器）
+                    const fromX = fromRect.left - containerRect.left + fromRect.width/2;
+                    const fromY = fromRect.top - containerRect.top + fromRect.height/2;
+                    const toX = toRect.left - containerRect.left + toRect.width/2;
+                    const toY = toRect.top - containerRect.top + toRect.height/2;
+                    
+                    // 计算边的长度和角度
+                    const length = Math.sqrt(Math.pow(toX - fromX, 2) + Math.pow(toY - fromY, 2));
+                    const angle = Math.atan2(toY - fromY, toX - fromX) * 180 / Math.PI;
+                    
+                    // 创建边元素
+                    const edgeElement = document.createElement('div');
+                    edgeElement.className = 'graph-edge';
+                    edgeElement.style.width = `${length}px`;
+                    edgeElement.style.left = `${fromX}px`;
+                    edgeElement.style.top = `${fromY}px`;
+                    edgeElement.style.transform = `rotate(${angle}deg)`;
+                    edgeElement.dataset.from = edge.from;
+                    edgeElement.dataset.to = edge.to;
+                    
+                    graphContainer.appendChild(edgeElement);
+                }
+            });
+        }
+        
+        // 运行DFS动画
+        function runDFSAnimation() {
+            // 获取所有节点和边
+            const nodes = document.querySelectorAll('.graph-node');
+            const edges = document.querySelectorAll('.graph-edge');
+            
+            // 定义图的邻接表
+            const graph = {
+                'A': ['B', 'C', 'D'],
+                'B': ['E'],
+                'C': ['E', 'D'],
+                'D': [],
+                'E': ['F'],
+                'F': []
+            };
+            
+            // 重置所有节点和边的状态
+            resetGraph();
+            
+            // 更新执行步骤
+            updateExecutionSteps(0);
+            
+            // 执行DFS动画
+            const startNode = 'A';
+            const visited = new Set();
+            let stepCount = 0;
+            
+            function dfsAnimate(node, delay = 0) {
+                setTimeout(() => {
+                    // 标记当前节点为已访问
+                    const nodeElement = Array.from(nodes).find(n => n.textContent === node);
+                    if (nodeElement) {
+                        nodeElement.classList.add('visited');
+                    }
+                    
+                    // 更新执行步骤
+                    updateExecutionSteps(stepCount++);
+                    
+                    visited.add(node);
+                    
+                    // 到达终点
+                    if (node === 'F') {
+                        // 标记找到的路径
+                        setTimeout(() => {
+                            highlightPath(['A', 'B', 'E', 'F']);
+                        }, 500);
+                        return;
+                    }
+                    
+                    // 获取相邻节点
+                    const neighbors = graph[node] || [];
+                    
+                    neighbors.forEach((neighbor, index) => {
+                        if (!visited.has(neighbor)) {
+                            // 标记边为路径
+                            setTimeout(() => {
+                                const edgeSelector = `[data-from="${node}"][data-to="${neighbor}"]`;
+                                const edge = document.querySelector(edgeSelector);
+                                if (edge) {
+                                    edge.classList.add('path');
+                                }
+                                
+                                // 递归访问相邻节点
+                                dfsAnimate(neighbor, 500);
+                            }, index * 500);
+                        }
+                    });
+                }, delay);
+            }
+            
+            // 开始DFS动画
+            dfsAnimate(startNode);
+        }
+        
+        // 重置图
+        function resetGraph() {
+            const nodes = document.querySelectorAll('.graph-node');
+            const edges = document.querySelectorAll('.graph-edge');
+            
+            nodes.forEach(node => {
+                if (node.classList.contains('start') || node.classList.contains('end')) {
+                    // 保留起点和终点标记
+                    node.classList.remove('visited', 'path');
+                } else {
+                    node.className = 'graph-node';
+                }
+            });
+            
+            edges.forEach(edge => {
+                edge.classList.remove('path');
+            });
+        }
+        
+        // 高亮路径
+        function highlightPath(path) {
+            // 高亮节点
+            path.forEach(node => {
+                const nodeElement = document.querySelector(`.graph-node[data-node="${node}"]`);
+                if (nodeElement) {
+                    nodeElement.classList.add('path');
+                }
+            });
+            
+            // 高亮边
+            for (let i = 0; i < path.length - 1; i++) {
+                const from = path[i];
+                const to = path[i + 1];
+                const edgeSelector = `[data-from="${from}"][data-to="${to}"]`;
+                const edge = document.querySelector(edgeSelector);
+                if (edge) {
+                    edge.classList.add('path');
+                }
+            }
+        }
+        
+        // 更新执行步骤
+        function updateExecutionSteps(currentStep) {
+            const steps = document.querySelectorAll('.execution-step');
+            steps.forEach((step, index) => {
+                step.classList.remove('current');
+                if (index === currentStep) {
+                    step.classList.add('current');
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

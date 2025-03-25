@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="算法冒险家 - 通过游戏学习数据结构与算法，轻松有趣地提升编程能力">
+    <meta name="keywords" content="算法,数据结构,编程学习,算法游戏,编程教育">
+    <title>算法冒险家 - 寓教于乐的算法学习平台</title>
+    <!-- 引入FontAwesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-logo">
+            <i class="fas fa-code-branch"></i> 算法冒险家
+        </a>
+        
+        <ul class="navbar-menu">
+            <li><a href="world-map.html">游戏世界</a></li>
+            <li><a href="#leaderboard">排行榜</a></li>
+            <li><a href="#daily-challenge">每日挑战</a></li>
+            <li><a href="#resources">学习资源</a></li>
+        </ul>
+        
+        <div class="navbar-auth">
+            <a href="#login" class="btn btn-outline">登录</a>
+            <a href="#register" class="btn btn-primary">注册</a>
+        </div>
+    </nav>
+    
+    <!-- 主页英雄区域 -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1>算法冒险家</h1>
+                <h2>学习算法，从未如此有趣</h2>
+                <p>通过各种精心设计的互动游戏，轻松学习复杂的数据结构和算法概念，提升你的编程能力！</p>
+                <div class="hero-buttons">
+                    <a href="world-map.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-play"></i> 开始探险
+                    </a>
+                    <a href="#how-it-works" class="btn btn-outline btn-large">
+                        <i class="fas fa-info-circle"></i> 了解更多
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div style="width: 500px; height: 400px; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <i class="fas fa-code-branch fa-5x" style="color: var(--primary-color);"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 主要游戏介绍 -->
+    <div class="featured-games" id="featured-games">
+        <div class="container">
+            <h2 class="section-title">探索我们的算法游戏世界</h2>
+            <p class="section-description">每款游戏都针对特定的数据结构或算法概念，在游戏过程中自然而然地掌握知识</p>
+            
+            <div class="games-grid">
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <div style="height: 200px; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; border-radius: 8px 8px 0 0;">
+                            <i class="fas fa-shield-alt fa-5x" style="color: var(--primary-color);"></i>
+                        </div>
+                        <div class="game-difficulty">初级</div>
+                    </div>
+                    <div class="game-card-content">
+                        <h3>数据结构防御塔</h3>
+                        <p>建造和升级不同类型的数据结构塔，抵御算法怪物的入侵！在战斗中学习数组、链表、树等结构的特性。</p>
+                        <div class="game-card-footer">
+                            <span class="game-card-info">
+                                <i class="fas fa-star"></i> 4.8
+                            </span>
+                            <span class="game-card-info">
+                                <i class="fas fa-users"></i> 12000+
+                            </span>
+                            <a href="tower-defense.html" class="btn btn-primary btn-sm">开始游戏</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <div style="height: 200px; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; border-radius: 8px 8px 0 0;">
+                            <i class="fas fa-sort fa-5x" style="color: var(--primary-color);"></i>
+                        </div>
+                        <div class="game-difficulty">中级</div>
+                    </div>
+                    <div class="game-card-content">
+                        <h3>排序城堡挑战</h3>
+                        <p>在魔法城堡中学习各种排序算法，通过可视化方式了解冒泡排序、插入排序、快速排序等算法的工作原理。</p>
+                        <div class="game-card-footer">
+                            <span class="game-card-info">
+                                <i class="fas fa-star"></i> 4.6
+                            </span>
+                            <span class="game-card-info">
+                                <i class="fas fa-users"></i> 8500+
+                            </span>
+                            <a href="sorting-game.html" class="btn btn-primary btn-sm">开始游戏</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <div style="height: 200px; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; border-radius: 8px 8px 0 0;">
+                            <i class="fas fa-project-diagram fa-5x" style="color: var(--primary-color);"></i>
+                        </div>
+                        <div class="game-difficulty">高级</div>
+                    </div>
+                    <div class="game-card-content">
+                        <h3>图论迷宫探险</h3>
+                        <p>在复杂的迷宫中探索图论算法，学习深度优先搜索、广度优先搜索、最短路径等算法，解开迷宫之谜。</p>
+                        <div class="game-card-footer">
+                            <span class="game-card-info">
+                                <i class="fas fa-star"></i> 4.9
+                            </span>
+                            <span class="game-card-info">
+                                <i class="fas fa-users"></i> 6300+
+                            </span>
+                            <a href="graph-game.html" class="btn btn-primary btn-sm">开始游戏</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-all-games">
+                <a href="world-map.html" class="btn btn-outline">
+                    <i class="fas fa-th"></i> 查看全部游戏
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 平台特色介绍 -->
+    <div class="features-section" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">为什么选择算法冒险家？</h2>
+            <p class="section-description">将复杂的算法知识点转化为有趣的游戏元素，在娱乐中提升编程能力</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>寓教于乐</h3>
+                    <p>通过游戏化学习方式，将枯燥的算法理论转化为有趣的互动体验，激发学习兴趣。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>循序渐进</h3>
+                    <p>从基础到高级，每个游戏都设计有不同难度级别，适合各个阶段的学习者。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>直观可视化</h3>
+                    <p>动态图形展示算法执行过程，帮助更直观地理解复杂概念和数据流动。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>社区互动</h3>
+                    <p>与其他学习者交流，分享进度和技巧，共同进步，激发持续学习动力。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>成就系统</h3>
+                    <p>完成挑战获得徽章和奖励，记录学习进度，增强成就感和满足感。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>实用知识</h3>
+                    <p>所有游戏内容紧贴编程实践和面试要点，助力学术学习和职业发展。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 用户评价 -->
+    <div class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">用户心声</h2>
+            <p class="section-description">来自真实用户的使用体验和评价</p>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"作为一名计算机科学专业的学生，我一直对数据结构和算法感到头疼。算法冒险家让学习变得有趣多了，通过游戏化的方式，我终于理解了红黑树的工作原理！"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="width: 60px; height: 60px; border-radius: 50%; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center;">
+                            <i class="fas fa-user-graduate" style="font-size: 24px; color: var(--primary-color);"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>张同学</h4>
+                            <p>计算机科学专业大三学生</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"身为自学编程的转行者，算法一直是我的弱项。在这个平台上学习了两个月后，我成功通过了大厂的算法面试！图论迷宫游戏对我帮助特别大。"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="width: 60px; height: 60px; border-radius: 50%; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center;">
+                            <i class="fas fa-user-tie" style="font-size: 24px; color: var(--primary-color);"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>李先生</h4>
+                            <p>前会计，现后端开发工程师</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"我是一名高中编程老师，将算法冒险家引入到课堂教学中，学生们的学习积极性明显提高！排序城堡和数据结构防御塔是我们班上最受欢迎的两款游戏。"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar" style="width: 60px; height: 60px; border-radius: 50%; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center;">
+                            <i class="fas fa-chalkboard-teacher" style="font-size: 24px; color: var(--primary-color);"></i>
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>王老师</h4>
+                            <p>高中信息技术教师</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonials-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 每日挑战 -->
+    <div class="daily-challenge-section" id="daily-challenge">
+        <div class="container">
+            <h2 class="section-title">今日算法挑战</h2>
+            <p class="section-description">每天一道精选算法题，培养持续学习的好习惯</p>
+            
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-title">
+                        <h3>有效的括号匹配</h3>
+                        <span class="challenge-difficulty">中等</span>
+                    </div>
+                    <div class="challenge-date">2023年10月15日</div>
+                </div>
+                
+                <div class="challenge-description">
+                    <p>给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。有效字符串需满足：左括号必须用相同类型的右括号闭合，左括号必须以正确的顺序闭合。</p>
+                    
+                    <div class="challenge-examples">
+                        <div class="example">
+                            <p><strong>示例1:</strong> 输入: s = "()[]{}" | 输出: true</p>
+                        </div>
+                        <div class="example">
+                            <p><strong>示例2:</strong> 输入: s = "([)]" | 输出: false</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-hint">
+                    <p><i class="fas fa-lightbulb"></i> 提示：考虑使用栈这种数据结构来解决这个问题</p>
+                </div>
+                
+                <div class="challenge-footer">
+                    <span class="challenge-stats">
+                        <i class="fas fa-users"></i> 今日已有 328 人完成
+                    </span>
+                    <a href="#" class="btn btn-primary">挑战这道题</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 学习路径 -->
+    <div class="learning-path-section" id="learning-path">
+        <div class="container">
+            <h2 class="section-title">推荐学习路径</h2>
+            <p class="section-description">根据不同目标定制的学习计划，循序渐进提升算法能力</p>
+            
+            <div class="path-tabs">
+                <div class="path-tab active" data-path="beginner">入门之旅</div>
+                <div class="path-tab" data-path="interview">面试强化</div>
+                <div class="path-tab" data-path="advanced">算法进阶</div>
+            </div>
+            
+            <div class="path-content active" id="beginner-path">
+                <div class="path-steps">
+                    <div class="path-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>基础数据结构</h3>
+                            <p>从数组和链表开始，学习最基本的数据存储结构</p>
+                            <a href="tower-defense.html" class="step-game">
+                                <i class="fas fa-gamepad"></i> 数据结构防御塔 Lv.1-3
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="path-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>基础排序算法</h3>
+                            <p>学习冒泡排序、选择排序和插入排序等简单排序算法</p>
+                            <a href="sorting-game.html" class="step-game">
+                                <i class="fas fa-gamepad"></i> 排序城堡初级关卡
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="path-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>搜索与递归</h3>
+                            <p>学习二分查找和简单递归思想</p>
+                            <a href="#" class="step-game">
+                                <i class="fas fa-gamepad"></i> 二叉树探险
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="path-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>基础图算法</h3>
+                            <p>理解图的表示和基本图遍历算法</p>
+                            <a href="graph-game.html" class="step-game">
+                                <i class="fas fa-gamepad"></i> 图论迷宫初级关卡
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="path-content" id="interview-path" style="display: none;">
+                <!-- 面试强化路径内容 -->
+                <div class="path-steps">
+                    <div class="path-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>复杂度分析</h3>
+                            <p>掌握时间复杂度和空间复杂度分析</p>
+                            <a href="#" class="step-game">
+                                <i class="fas fa-gamepad"></i> 算法效率实验室
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="path-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>高级排序</h3>
+                            <p>学习并掌握快速排序、归并排序、堆排序</p>
+                            <a href="sorting-game.html" class="step-game">
+                                <i class="fas fa-gamepad"></i> 排序城堡高级关卡
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="path-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>哈希与字符串</h3>
+                            <p>哈希表应用和常见字符串算法</p>
+                            <a href="#" class="step-game">
+                                <i class="fas fa-gamepad"></i> 哈希解密者
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="path-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>动态规划入门</h3>
+                            <p>学习基本动态规划问题</p>
+                            <a href="#" class="step-game">
+                                <i class="fas fa-gamepad"></i> DP宝藏猎人
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="path-content" id="advanced-path" style="display: none;">
+                <!-- 算法进阶路径内容 -->
+                <div class="path-steps">
+                    <div class="path-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>高级数据结构</h3>
+                            <p>红黑树、B树、Trie树等复杂数据结构</p>
+                            <a href="#" class="step-game">
+                                <i class="fas fa-gamepad"></i> 平衡树守护者
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="path-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>高级图算法</h3>
+                            <p>最短路径、最小生成树、网络流算法</p>
+                            <a href="#" class="step-game">
+                                <i class="fas fa-gamepad"></i> 图论迷宫大师级
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="path-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>复杂动态规划</h3>
+                            <p>状态压缩DP、区间DP、树形DP等</p>
+                            <a href="#" class="step-game">
+                                <i class="fas fa-gamepad"></i> DP宝藏猎人高级
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="path-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>竞赛算法</h3>
+                            <p>KMP、FFT、线段树等高级算法</p>
+                            <a href="#" class="step-game">
+                                <i class="fas fa-gamepad"></i> 算法竞技场
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 号召性动作区域 -->
+    <div class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>准备好开始你的算法冒险了吗？</h2>
+                <p>现在注册，免费解锁所有基础游戏关卡！</p>
+                <a href="#register" class="btn btn-primary btn-large">立即注册，开始探险</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-code-branch"></i> 算法冒险家
+                </div>
+                <div class="footer-links">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系方式</a>
+                    <a href="#">使用条款</a>
+                    <a href="#">隐私政策</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2023 算法冒险家. 保留所有权利.
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 学习路径切换功能
+            const pathTabs = document.querySelectorAll('.path-tab');
+            const pathContents = document.querySelectorAll('.path-content');
+            
+            pathTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 移除所有激活状态
+                    pathTabs.forEach(t => t.classList.remove('active'));
+                    pathContents.forEach(c => c.style.display = 'none');
+                    
+                    // 激活当前选项卡
+                    this.classList.add('active');
+                    const pathId = this.getAttribute('data-path');
+                    document.getElementById(`${pathId}-path`).style.display = 'block';
+                });
+            });
+            
+            // 轮播图功能
+            let currentSlide = 0;
+            const dots = document.querySelectorAll('.dot');
+            const cards = document.querySelectorAll('.testimonial-card');
+            
+            function showSlide(index) {
+                // 隐藏所有卡片
+                cards.forEach(card => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateX(50px)';
+                });
+                
+                // 移除所有点的激活状态
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // 显示选定的卡片
+                setTimeout(() => {
+                    cards[index].style.opacity = '1';
+                    cards[index].style.transform = 'translateX(0)';
+                    dots[index].classList.add('active');
+                }, 300);
+                
+                currentSlide = index;
+            }
+            
+            // 初始化显示第一张卡片
+            showSlide(0);
+            
+            // 点击指示点切换轮播图
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                });
+            });
+            
+            // 自动切换轮播图
+            setInterval(() => {
+                let nextSlide = (currentSlide + 1) % cards.length;
+                showSlide(nextSlide);
+            }, 5000);
+        });
+    </script>
+</body>
+</html> 

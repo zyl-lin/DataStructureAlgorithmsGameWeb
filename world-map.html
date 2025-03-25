@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏世界地图 - 算法冒险家</title>
+    <!-- 引入FontAwesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-logo">
+            <i class="fas fa-code-branch"></i> 算法冒险家
+        </a>
+        
+        <ul class="navbar-menu">
+            <li><a href="world-map.html" class="active">游戏世界</a></li>
+            <li><a href="#leaderboard">排行榜</a></li>
+            <li><a href="#daily-challenge">每日挑战</a></li>
+            <li><a href="#resources">学习资源</a></li>
+        </ul>
+        
+        <div class="navbar-auth">
+            <a href="#login" class="btn btn-outline">登录</a>
+            <a href="#register" class="btn btn-primary">注册</a>
+        </div>
+    </nav>
+
+    <!-- 主内容区域 -->
+    <div class="container">
+        <h1>算法冒险世界</h1>
+        <p>探索不同的区域，解锁算法和数据结构的奥秘！点击地图上的位置开始你的冒险。</p>
+        
+        <!-- 世界地图 -->
+        <div class="world-map-container">
+            <div class="world-map">
+                <!-- 排序城堡 -->
+                <div class="map-location" style="top: 10%; left: 20%;" data-game="sorting-game">
+                    <div class="map-icon">🏰</div>
+                    <div class="map-label">排序城堡</div>
+                </div>
+                
+                <!-- 链表桥 -->
+                <div class="map-location" style="top: 30%; left: 40%;" data-game="linked-list">
+                    <div class="map-icon">🌉</div>
+                    <div class="map-label">链表桥</div>
+                </div>
+                
+                <!-- 递归山脉 -->
+                <div class="map-location" style="top: 20%; right: 20%;" data-game="recursion">
+                    <div class="map-icon">🏔️</div>
+                    <div class="map-label">递归山脉</div>
+                </div>
+                
+                <!-- 数组神殿 -->
+                <div class="map-location" style="top: 50%; left: 20%;" data-game="array">
+                    <div class="map-icon">🏯</div>
+                    <div class="map-label">数组神殿</div>
+                </div>
+                
+                <!-- 图论迷宫 -->
+                <div class="map-location" style="top: 40%; right: 15%;" data-game="graph-game">
+                    <div class="map-icon">⛩️</div>
+                    <div class="map-label">图论迷宫</div>
+                </div>
+                
+                <!-- 哈希岛屿 -->
+                <div class="map-location" style="top: 60%; left: 40%;" data-game="hash">
+                    <div class="map-icon">🏝️</div>
+                    <div class="map-label">哈希岛屿</div>
+                </div>
+                
+                <!-- 动态规划宝塔 -->
+                <div class="map-location" style="top: 70%; right: 30%;" data-game="dynamic-programming">
+                    <div class="map-icon">🗼</div>
+                    <div class="map-label">动态规划宝塔</div>
+                </div>
+                
+                <!-- 路径会通过JavaScript动态生成 -->
+            </div>
+        </div>
+        
+        <!-- 区域简介 -->
+        <div class="region-info">
+            <h2>区域简介</h2>
+            <div class="region-cards">
+                <div class="region-card">
+                    <div class="region-icon">🏰</div>
+                    <h3>排序城堡</h3>
+                    <p>学习各种排序算法，包括冒泡排序、快速排序和归并排序等。通过排序城堡的挑战，掌握排序算法的原理和应用。</p>
+                    <a href="sorting-game.html" class="btn btn-primary">开始挑战</a>
+                </div>
+                
+                <div class="region-card">
+                    <div class="region-icon">⛩️</div>
+                    <h3>图论迷宫</h3>
+                    <p>探索图论算法的奥秘，学习如何使用BFS、DFS和Dijkstra等算法解决迷宫问题。找出最短路径，成为图论大师！</p>
+                    <a href="graph-game.html" class="btn btn-primary">开始挑战</a>
+                </div>
+                
+                <div class="region-card">
+                    <div class="region-icon">🏯</div>
+                    <h3>数组神殿</h3>
+                    <p>掌握数组操作的基础和高级技巧，学习二分查找、滑动窗口等经典数组算法。解锁数组神殿中的秘密！</p>
+                    <a href="#" class="btn btn-outline">即将推出</a>
+                </div>
+                
+                <div class="region-card">
+                    <div class="region-icon">🗼</div>
+                    <h3>动态规划宝塔</h3>
+                    <p>挑战各种动态规划问题，从基础到高级。学习如何分解问题、寻找状态转移方程，成为算法大师！</p>
+                    <a href="#" class="btn btn-outline">即将推出</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 玩家进度 -->
+        <div class="player-progress">
+            <h2>你的冒险进度</h2>
+            <div class="progress-overview">
+                <div class="progress-stat">
+                    <div class="stat-value">2/7</div>
+                    <div class="stat-label">探索区域</div>
+                </div>
+                <div class="progress-stat">
+                    <div class="stat-value">14</div>
+                    <div class="stat-label">解锁关卡</div>
+                </div>
+                <div class="progress-stat">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">获得成就</div>
+                </div>
+                <div class="progress-stat">
+                    <div class="stat-value">1250</div>
+                    <div class="stat-label">总得分</div>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-value" style="width: 35%;"></div>
+            </div>
+            <p class="progress-text">已完成 35% 的算法冒险之旅</p>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-code-branch"></i> 算法冒险家
+                </div>
+                <div class="footer-links">
+                    <a href="#">关于我们</a>
+                    <a href="#">联系方式</a>
+                    <a href="#">使用条款</a>
+                    <a href="#">隐私政策</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2023 算法冒险家. 保留所有权利.
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html> 
